@@ -5,11 +5,23 @@ C code for wraping python scripts in an executable (bootleg pyinstaller)
 how to use (on linux):
 
 step 1:
-    edit line 1 of main.c
-    #define IN "your base64 encoded python script"
+
+    git clone https://github.com/9-s3c/C-python-loader
 
 step 2:
+
+    cd C-python-loader/
+
+step 3:
+
+    nano main.c
+    #define IN "your base64 encoded python script"
+
+step 4:
+
     sudo apt install mingw-w64-i686-dev -y
     
-step 3:
+step 5:
+
     i686-w64-mingw32-gcc -o main.exe main.c -lurlmon -w
+
