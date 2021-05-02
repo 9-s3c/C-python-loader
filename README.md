@@ -14,7 +14,7 @@ step 2:
 
 step 3:
 
-    nano main.c
+    nano exec.c
     #define IN "your base64 encoded python script"
 
 step 4:
@@ -23,5 +23,5 @@ step 4:
     
 step 5:
 
-    i686-w64-mingw32-gcc -o main.exe main.c -lurlmon -w
+    i686-w64-mingw32-gcc -o main.exe exec.c -lurlmon -w
 
