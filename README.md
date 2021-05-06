@@ -2,6 +2,9 @@
 C code for wraping python scripts in an executable (bootleg pyinstaller)
 
 
+check out the demo video https://www.youtube.com/watch?v=M0RBf8s57FQ
+
+
 how to use (on linux):
 
 step 1:
